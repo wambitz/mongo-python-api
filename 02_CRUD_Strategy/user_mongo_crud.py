@@ -8,8 +8,8 @@ from crud import CRUDContext, CRUDStrategy
 class UserCRUD(CRUDStrategy):
     def __init__(self):
         mongodb_host = os.getenv('MONGODB_HOST', 'localhost')
-        client = MongoClient(f'mongodb://{mongodb_host}:27017/')
-        self.db = self.client.users
+        self.client = MongoClient(f'mongodb://{mongodb_host}:27017/')  # Set client as an instance attribute
+        self.db = self.client['price-tracker']  # Replace 'your_database_name' with the actual name
         self.collection = self.db.users
 
     def create(self, data):
@@ -39,13 +39,17 @@ if __name__ == '__main__':
     user = user_crud.read(user_id)
     print(user)
     user_crud.update(user_id, {"email": "newemail@example.com"})
+    user = user_crud.read(user_id)
+    print(user)
     user_crud.delete(user_id)
 
     # Initialize context with UserCRUD as the default strategy
     crud_context = CRUDContext(UserCRUD())
     # crud_context.set_strategy(UserCRUD())
-    used_id = crud_context.create({"name": "John Doe", "email": "johndoe@example.com"})
+    user_id = crud_context.create({"name": "John Doe", "email": "johndoe@example.com"})
     user = crud_context.read(user_id)
     print(user)
     crud_context.update(user_id, {"email": "newemail@example.com"})
+    user = user_crud.read(user_id)
+    print(user)
     crud_context.delete(user_id)
