@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  web:
+    build: .
+    environment:
+      - MONGODB_HOST=mongo-server
+    ports:
+      - "5000:5000"
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo:latest
+    volumes:
+      - ./data/db:/data/db
+    ports:
+      - "27017:27017"

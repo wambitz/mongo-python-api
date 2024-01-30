@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  flask-app:
+    image: flask-app
+    ports:
+      - "5000:5000"
+    networks:
+      - mongo-network
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_RUN_HOST=0.0.0.0
+      - MONGODB_HOST=mongo-server
+    depends_on:
+      - mongo-server
+
+  mongo-server:
+    image: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - mongo-network
+
+networks:
+  mongo-network:
+    driver: bridge
