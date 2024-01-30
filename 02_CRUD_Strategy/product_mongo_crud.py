@@ -8,9 +8,10 @@ from crud import CRUDContext, CRUDStrategy
 class ProductCRUD(CRUDStrategy):
     def __init__(self):
         mongodb_host = os.getenv('MONGODB_HOST', 'localhost')
-        client = MongoClient(f'mongodb://{mongodb_host}:27017/')
-        self.db = self.client.products
+        self.client = MongoClient(f'mongodb://{mongodb_host}:27017/')  # Set client as an instance attribute
+        self.db = self.client['price-tracker']  # Replace 'your_database_name' with the actual name
         self.collection = self.db.products
+
 
     def create(self, data):
         result = self.collection.insert_one(data)
@@ -37,8 +38,10 @@ if __name__ == '__main__':
     product_id = product_crud.create({"product_id": "123", "name": "Example Product", "price": 29.99})
     product = product_crud.read(product_id)
     print(product)
-    user_crud.update(product_id, {"price": 99.99})
-    user_crud.delete(product_id)
+    product_crud.update(product_id, {"price": 99.99})
+    product = product_crud.read(product_id)
+    print(product)
+    product_crud.delete(product_id)
 
     # Initialize context with UserCRUD as the default strategy
     crud_context = CRUDContext(ProductCRUD())
@@ -47,4 +50,6 @@ if __name__ == '__main__':
     product = crud_context.read(product_id)
     print(product)
     crud_context.update(product_id, {"price": 99.99})
+    product = product_crud.read(product_id)
+    print(product)
     crud_context.delete(product_id)
