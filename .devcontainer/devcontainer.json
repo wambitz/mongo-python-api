@@ -1,0 +1,11 @@
+{
+    "name": "Your Project Name",
+    "context": "..",
+    "dockerFile": "Dockerfile",
+    "settings": { 
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": ["ms-python.python"],
+    "forwardPorts": [5000],
+    "postCreateCommand": "pip install -r requirements.txt"
+}

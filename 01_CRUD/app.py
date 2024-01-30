@@ -10,7 +10,7 @@ app = Flask(__name__)
 # Use an environment variable for the MongoDB URI with a default value
 mongodb_host = os.getenv('MONGODB_HOST', 'localhost')
 client = MongoClient(f'mongodb://{mongodb_host}:27017/')
-db = client.amazon_products
+db = client.price_tracker
 
 @app.route('/')
 def index():
