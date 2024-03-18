@@ -1,3 +1,5 @@
+[← Back to Main README](../README.md)
+
 # MongoDB Shell (mongosh) Cheat Sheet
 
 ## Basic Operations
@@ -46,4 +48,8 @@
 
 - **Scripting with JavaScript**: Write JavaScript functions and execute them in mongosh.
 - **Enable/Disable Profiling**: `db.setProfilingLevel(<level>)`
+
+---
+
+[← Previous: Testing Mongo CRUD API ](./TESTING.md)
 

@@ -30,7 +30,7 @@
 							"raw": "{\r\n    \"username\": \"jonhdoe\",\r\n    \"name\": \"John Doe\",\r\n    \"email\": \"john@example.com\"\r\n}"
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/user",
+							"raw": "http://127.0.0.1:5000/users",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -40,7 +40,7 @@
 							],
 							"port": "5000",
 							"path": [
-								"user"
+								"users"
 							]
 						}
 					},
@@ -48,11 +48,21 @@
 				},
 				{
 					"name": "Retrieve User",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "graphql",
+							"graphql": {
+								"query": "",
+								"variables": ""
+							}
+						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/user/jonhdoe",
+							"raw": "http://127.0.0.1:5000/users/jonhdoe",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -62,7 +72,7 @@
 							],
 							"port": "5000",
 							"path": [
-								"user",
+								"users",
 								"jonhdoe"
 							]
 						}
@@ -84,7 +94,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/user/jonhdoe",
+							"raw": "http://127.0.0.1:5000/users/jonhdoe",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -94,7 +104,7 @@
 							],
 							"port": "5000",
 							"path": [
-								"user",
+								"users",
 								"jonhdoe"
 							]
 						}
@@ -107,7 +117,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/user/jonhdoe",
+							"raw": "http://127.0.0.1:5000/users/jonhdoe",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -117,7 +127,7 @@
 							],
 							"port": "5000",
 							"path": [
-								"user",
+								"users",
 								"jonhdoe"
 							]
 						}
@@ -150,7 +160,7 @@
 							"raw": "{\r\n  \"product_id\": \"123\",\r\n  \"name\": \"Example Product\",\r\n  \"price\": 29.99\r\n}"
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/product",
+							"raw": "http://127.0.0.1:5000/products",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -160,7 +170,7 @@
 							],
 							"port": "5000",
 							"path": [
-								"product"
+								"products"
 							]
 						}
 					},
@@ -168,11 +178,23 @@
 				},
 				{
 					"name": "Retrieve Product",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
 						"method": "GET",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/product/123",
+							"raw": "http://127.0.0.1:5000/products/123",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -182,7 +204,7 @@
 							],
 							"port": "5000",
 							"path": [
-								"product",
+								"products",
 								"123"
 							]
 						}
@@ -204,7 +226,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:5000/product/123",
+							"raw": "http://127.0.0.1:5000/products/123",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -214,7 +236,7 @@
 							],
 							"port": "5000",
 							"path": [
-								"product",
+								"products",
 								"123"
 							]
 						}
@@ -227,7 +249,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:5000/product/123",
+							"raw": "http://127.0.0.1:5000/products/123",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -237,7 +259,7 @@
 							],
 							"port": "5000",
 							"path": [
-								"product",
+								"products",
 								"123"
 							]
 						}
@@ -250,7 +272,21 @@
 			"name": "hello",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:5000/",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "5000",
+					"path": [
+						""
+					]
+				}
 			},
 			"response": []
 		}

@@ -44,7 +44,7 @@ if __name__ == "__main__":
                   network="app-network",
                   environment={"MONGODB_HOST": mongodb_host},
                   remove=True,
-                  working_dir="/01_CRUD")
+                  working_dir="/00_HelloWorld")
 
     # MongoDB container
     run_container(client, 
