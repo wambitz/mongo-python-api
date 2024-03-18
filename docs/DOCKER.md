@@ -1,45 +1,66 @@
+[← Back to Main README](../README.md)
+
 # Running your application with containers
 
-To simplify you execution you cand run the following scripts
+In `app.py` the commented out lines need to be replaced. 
 
-`build.py`:
+```python
 
-- Build mongo image
-- Build flask app image
-- Creates the required docker network to communicate the containers
+from flask import Flask, jsonify, request
+from pymongo import MongoClient
 
-`run.py`:
+app = Flask(__name__)
 
-- Run a temporary mongo container in deattached mode
-- Run a temporary flask container in deattached mode
+# Replace this:
+# client = MongoClient("mongodb://localhost:27017/")
+# db = client.amazon_products  # database name
 
-Notes
+# For this: 
+mongodb_host = os.getenv('MONGODB_HOST')
+if mongodb_host is None or mongodb_host == '':
+    if os.path.exists('/.dockerenv'):
+        mongodb_host = 'mongodb-server'
+    else:
+        mongodb_host = "localhost"
 
-- Flask app container cannot communicate with mongo server either locally or in a separate container if the containers are not configured to use the same network
+client = MongoClient(f'mongodb://{mongodb_host}:27017/')
+db = client.test_db
+
+@app.route('/')
+def index():
+    return "Welcome to the Amazon Products API!"
+
+# Rest of the CRUD app ...
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+```
 
 
 ## Manual setup
 
-Certainly! Setting up a Flask app and MongoDB using `docker build` and `docker run` instead of Docker Compose involves a few more manual steps, but it's definitely doable and provides a good understanding of how containers interact. Let's go through the process:
+Setting up a Flask app and MongoDB using `docker build` and `docker run` instead of Docker Compose involves a few more manual steps, but it's definitely doable and provides a good understanding of how containers interact. Let's go through the process:
 
 ### 1. **Build the Flask App Docker Image**
 
 First, you need to build a Docker image for your Flask application. Assuming you have the same `Dockerfile` and `app.py` from the previous example, you can build the image like this:
 
 ```bash
-docker build -t flaskapp .
+docker build -t flask-app .
 ```
 
-This command builds the Docker image with the tag `flaskapp` based on the Dockerfile in the current directory.
+This command builds the Docker image with the tag `flask-app` based on the Dockerfile in the current directory.
 
 ### 2. **Run the MongoDB Container**
 
 Next, run the MongoDB container. You can pull the official MongoDB image and run it:
 
 ```bash
-docker run --rm --name mongo-server -d -p 27017:27017 mongo
+docker run --rm --name mongodb-server -d -p 27017:27017 mongo
+
 # Alternatively if the network already exists:
-# docker run --rm --name mongo-server --network mongo-network -d -p 27017:27017 mongo
+# docker run --rm --name mongodb-server --network app-network -d -p 27017:27017 mongo
 ```
 
 This command runs MongoDB in a container named `mongo`, exposes port 27017 (the default MongoDB port), and runs it in detached mode.
@@ -49,13 +70,25 @@ This command runs MongoDB in a container named `mongo`, exposes port 27017 (the 
 For the Flask app to communicate with MongoDB, both containers need to be on the same network. You can use the default bridge network, but creating a custom network provides better control:
 
 ```bash
-docker network create mongo-network
+docker network create app-network
+```
+
+Verify the network was successfully created:
+
+```bash
+docker network ls
 ```
 
 Then, connect the MongoDB container to this network:
 
 ```bash
-docker network connect mongo-network mongo-server
+docker network connect app-network mongodb-server
+```
+
+Verify the container is connected to the network:
+
+```bash
+docker network inspect app-network
 ```
 
 ### 4. **Run the Flask App Container**
@@ -63,10 +96,16 @@ docker network connect mongo-network mongo-server
 Now, run your Flask app container and connect it to the same network:
 
 ```bash
-docker run --rm --name flaskapp -d -p 5000:5000 --network mongo-network flaskapp
+docker run --rm --name flask-app -d -p 5000:5000 --network app-network flask-app
 ```
 
-This command runs your Flask app in a container named `flaskapp`, exposes port 5000, and connects it to the `app-network`.
+Verify the container is the same network
+
+```bash
+docker network inspect app-network
+```
+
+This command runs your Flask app in a container named `flask-app`, exposes port 5000, and connects it to the `app-network`.
 
 ### 5. **Verify the Setup**
 
@@ -83,8 +122,8 @@ This should return a message confirming the connection to MongoDB.
 If you encounter any issues, check the logs of your containers:
 
 ```bash
-docker logs flaskapp
-docker logs mongo
+docker logs flask-app
+docker logs mongodb-server
 ```
 
 ### 7. **Cleanup**
@@ -92,14 +131,14 @@ docker logs mongo
 When you're done, you can stop and remove the containers:
 
 ```bash
-docker stop flaskapp mongo
-docker rm flaskapp mongo
+docker stop flask-app mongodb-server
+docker rm flask-app mongodb-server
 ```
 
 And if you created a custom network, you can remove it too:
 
 ```bash
-docker network rm mongo-network
+docker network rm app-network
 ```
 
 ### Additional Notes:
@@ -109,3 +148,7 @@ docker network rm mongo-network
 - **Security**: Be cautious with port exposure and security configurations, especially if you're planning for a production deployment.
 
 This approach gives you a more granular control over your containers and helps in understanding the networking and communication between different Docker containers.
+
+---
+
+[← Previous: CRUD API ](./API.md) | [Next: Testing →](./TESTING.md)

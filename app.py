@@ -1,13 +1,11 @@
-import os
 
 from flask import Flask, jsonify, request
 from pymongo import MongoClient
 
+import os
 
 app = Flask(__name__)
 
-# Initialize MongoDB connection
-# Use an environment variable for the MongoDB URI with a default value
 mongodb_host = os.getenv('MONGODB_HOST')
 if mongodb_host is None or mongodb_host == '':
     if os.path.exists('/.dockerenv'):
@@ -106,4 +104,4 @@ def delete_user(username):
 
 if __name__ == '__main__':
     # NOTE! host='0.0.0.0' is required to be able to reach the server outside the container
-    app.run(host="0.0.0.0", debug=True)
+    app.run(host='0.0.0.0', debug=True)

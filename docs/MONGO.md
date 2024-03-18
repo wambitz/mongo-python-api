@@ -1,4 +1,6 @@
-# MongoDB Notes
+[← Back to Main README](../README.md)
+
+# Setup MongoDB for development
 
 ## Installing Mongo Locally on Windows
 
@@ -29,13 +31,13 @@ Installing Mongo Server and Client locally on Windows involves a series of steps
 2. **Locate the Bin Directory**: The `bin` directory is usually located in `C:\InstallDir\MongoDB\Server\{version}\bin` and `C:\InstallDir\MongoDB\Shell\{version}\bin`. Replace `{version}` with your installed version. 
 
 3. **Edit System Environment Variables**:
-   - Right-click on “This PC” or “My Computer” on your desktop or in File Explorer.
-   - Click “Properties”.
-   - Click “Advanced system settings”.
-   - In the “System Properties” window, click the “Environment Variables” button.
-   - In the “System Variables” section, scroll down and select the “Path” variable, then click “Edit”.
-   - Click “New” and add the path to the MongoDB and MongoSH `bin` directory.
-   - Click “OK” to close all dialog boxes.
+   - Right-click on `This PC` or `My Computer` on your desktop or in `File Explorer`.
+   - Click `Properties`.
+   - Click `Advanced system settings`.
+   - In the `System Properties` window, click the `Environment Variables` button.
+   - In the `System Variable` section, scroll down and select the `Path` variable, then click `Edit`.
+   - Click `New` and add the path to the MongoDB and MongoSH `bin` directory.
+   - Click `OK` to close all dialog boxes.
 
 ### 4. Verify Installation
 
@@ -96,7 +98,7 @@ Here's how you can open the MongoDB shell:
    exit
    ```
 
-The MongoDB shell (`mongo`) is a powerful tool for interacting with your MongoDB database. It supports a wide range of operations from simple queries to complex aggregations. As you're already experienced in software engineering, you'll find the MongoDB shell's syntax straightforward, especially if you're familiar with JSON-like structures.
+The MongoDB shell (`mongo`) is a powerful tool for interacting with your MongoDB database. It supports a wide range of operations from simple queries to complex aggregations. As you're already experienced in software engineering, you'll find the MongoDB shell's syntax straightforward, especially if you're familiar with `JSON`-like structures.
 
 Remember, MongoDB uses JavaScript-like syntax for its shell commands, which can be very convenient for running quick queries or administrative tasks. You might also want to explore GUI tools like MongoDB Compass for a more visual approach to managing your MongoDB databases, especially for more complex queries and data visualization.
 
@@ -122,7 +124,7 @@ This command downloads the latest official MongoDB image to your local machine.
 **Temporary Container**: To test MongoDB inside a temporary container, use the following command:
 
 ```bash
-docker run --rm -d -p 27017:27017 mongo
+docker run --rm --name mongodb-server -d -p 27017:27017 mongo
 ```
 
 Explanation of the parameters:
@@ -133,11 +135,11 @@ Explanation of the parameters:
 **Persistent Container**: To run MongoDB inside a persistent container, use the following command:
 
 ```bash
-docker run --name mongodb -d -p 27017:27017 mongo
+docker run --name mongodb-server -d -p 27017:27017 mongo
 ```
 
 Explanation of the parameters:
-- `--name mongodb`: Names the container "mongodb".
+- `--name mongodb-server`: Names the container "mongodb-server".
 - `-d`: Runs the container in detached mode (in the background).
 - `-p 27017:27017`: Maps the default MongoDB port (27017) from the container to the host machine.
 
@@ -162,14 +164,14 @@ Now, MongoDB is running in a Docker container. You can interact with it just lik
 
 2. **Container: Connect using Docker Exec**: You can also connect to the MongoDB shell directly within the container:
 
-   **Temporary Container**:
    ```bash
-   docker exec -it <contained_id> mongosh
+   docker exec -it <contained_id_or_name> mongosh
    ```
 
-   **Persistent Container**
+   For example: 
+
    ```bash
-   docker exec -it mongodb mongosh
+   docker exec -it mongodb-server mongosh # or container_id hash
    ```
 
 ### Step 5: Managing the MongoDB Container
@@ -193,25 +195,25 @@ exit
 - **Stopping the Container**: When you're done, you can stop the container:
 
   ```bash
-  docker stop mongodb
+  docker stop mongodb-server
   ```
 
 - **Starting the Container Again**: To start it again:
 
   ```bash
-  docker start mongodb
+  docker start mongodb-server
   ```
 
 - **Accessing Logs**: To see the logs of the MongoDB container:
 
   ```bash
-  docker logs mongodb
+  docker logs mongodb-server
   ```
 
 - **Removing the Container**: If you want to remove the container:
 
   ```bash
-  docker rm -f mongodb
+  docker rm -f mongodb-server
   ```
 
 ### Data Persistence
@@ -221,7 +223,7 @@ One important aspect of running MongoDB in Docker is data persistence. Without p
 To persist data, you can mount a directory from your host machine to the container:
 
 ```bash
-docker run --name mongodb -d -p 27017:27017 -v /my/own/datadir:/data/db mongo
+docker run --name mongodb-server -d -p 27017:27017 -v /my/own/datadir:/data/db mongo
 ```
 
 Replace `/my/own/datadir` with the path to a directory on your host machine. This directory will be used by MongoDB to store data persistently.
@@ -230,3 +232,6 @@ Replace `/my/own/datadir` with the path to a directory on your host machine. Thi
 
 Using MongoDB in a Docker container offers a lot of flexibility, especially for development and testing. It ensures your MongoDB instance is isolated and doesn't interfere with other projects or system settings. As someone interested in new technologies and software engineering, you might find this approach very efficient for various projects and experiments.
 
+---
+
+[← Previous: Content](../README.md) | [Next: CRUD API →](./API.md)

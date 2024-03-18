@@ -1,5 +1,6 @@
-# Testing Mongo CRUD API
+[← Back to Main README](../README.md)
 
+# Testing Mongo CRUD API
 
 ## Testing with Postman
 
@@ -19,7 +20,7 @@ Below is a step by step guide on how to it on your own.
 #### **Add a Product**
 
 1. **Set Request Type to `POST`**: In Postman, select `POST` from the dropdown.
-2. **Enter URL**: Enter `http://localhost:5000/product`.
+2. **Enter URL**: Enter `http://localhost:5000/products`.
 3. **Set Headers**: Set `Content-Type` to `application/json`.
 4. **Enter Request Body**: Enter product details in JSON format.
    ```json
@@ -33,7 +34,7 @@ Below is a step by step guide on how to it on your own.
 
 #### **Add a User**
 
-Follow similar steps as above but use the `/user` endpoint and a user data JSON.
+Follow similar steps as above but use the `/users` endpoint and a user data JSON.
 
 ```json
 {
@@ -48,43 +49,43 @@ Follow similar steps as above but use the `/user` endpoint and a user data JSON.
 #### **Get a Product**
 
 1. **Set Request Type to `GET`**.
-2. **Enter URL**: `http://localhost:5000/product/<product_id>`, replacing `<product_id>` with the actual product ID.
+2. **Enter URL**: `http://localhost:5000/products/<product_id>`, replacing `<product_id>` with the actual product ID.
 3. **Send Request**.
 
 #### **Get a User**
 
-Use the `/user/<username>` endpoint, replacing `<username>` with the actual username.
+Use the `/users/<username>` endpoint, replacing `<username>` with the actual username.
 
 ### 3. Testing `UPDATE` Operations
 
 #### **Update a Product**
 
 1. **Set Request Type to `PUT`**.
-2. **Enter URL**: `http://localhost:5000/product/<product_id>`.
+2. **Enter URL**: `http://localhost:5000/products/<product_id>`.
 3. **Set Headers** and **Request Body**: Same as in `CREATE`, but with updated data.
 4. **Send Request**.
 
 #### **Update a User**
 
-Use the `/user/<username>` endpoint with updated user data.
+Use the `/users/<username>` endpoint with updated user data.
 
 ### 4. Testing `DELETE` Operations
 
 #### **Delete a Product**
 
 1. **Set Request Type to `DELETE`**.
-2. **Enter URL**: `http://localhost:5000/product/<product_id>`.
+2. **Enter URL**: `http://localhost:5000/products/<product_id>`.
 3. **Send Request**.
 
 #### **Delete a User**
 
-Use the `/user/<username>` endpoint for deleting a user.
+Use the `/users/<username>` endpoint for deleting a user.
 
 ### Notes:
 
 - Ensure that MongoDB is running and accessible.
 - Replace placeholders like `<product_id>` and `<username>` with actual values present in your database.
-- After creating an entity (product/user), use the returned ID or username for subsequent Read, Update, or Delete operations.
+- After creating an entity (product/users), use the returned ID or username for subsequent Read, Update, or Delete operations.
 - For `PUT` requests, ensure your JSON body contains the fields you want to update.
 - Always check the response in Postman for successful execution or error messages.
 
@@ -103,12 +104,12 @@ Here are examples of `curl` commands for each type of request:
 #### **Add a Product**
 
 <!-- 192.168.4.40 -->
-<!-- curl -X POST http://192.168.4.40:5000/product \
+<!-- curl -X POST http://192.168.4.40:5000/products \
 -H "Content-Type: application/json" \
 -d '{"product_id": "123", "name": "Example Product", "price": 29.99}' -->
 
 ```bash
-curl -X POST http://localhost:5000/product \
+curl -X POST http://localhost:5000/products \
 -H "Content-Type: application/json" \
 -d '{"product_id": "123", "name": "Example Product", "price": 29.99}'
 ```
@@ -118,7 +119,7 @@ curl -X POST http://localhost:5000/product \
 #### **Add a User**
 
 ```bash
-curl -X POST http://localhost:5000/user \
+curl -X POST http://localhost:5000/users \
 -H "Content-Type: application/json" \
 -d '{"username": "johndoe", "email": "john@example.com"}'
 ```
@@ -127,10 +128,10 @@ curl -X POST http://localhost:5000/user \
 
 #### **Get a Product**
 
-<!-- curl -X GET http://192.168.4.40:5000/product/123 -->
+<!-- curl -X GET http://192.168.4.40:5000/products/123 -->
 
 ```bash
-curl -X GET http://localhost:5000/product/123
+curl -X GET http://localhost:5000/products/123
 ```
 
 Replace `123` with the actual `product_id`.
@@ -138,7 +139,7 @@ Replace `123` with the actual `product_id`.
 #### **Get a User**
 
 ```bash
-curl -X GET http://localhost:5000/user/johndoe
+curl -X GET http://localhost:5000/users/johndoe
 ```
 
 Replace `johndoe` with the actual `username`.
@@ -147,12 +148,12 @@ Replace `johndoe` with the actual `username`.
 
 #### **Update a Product**
 
-<!-- curl -X PUT http://192.168.4.40:5000/product/123 \
+<!-- curl -X PUT http://192.168.4.40:5000/products/123 \
 -H "Content-Type: application/json" \
 -d '{"name": "Updated Product Name", "price": 39.99}' -->
 
 ```bash
-curl -X PUT http://localhost:5000/product/123 \
+curl -X PUT http://localhost:5000/products/123 \
 -H "Content-Type: application/json" \
 -d '{"name": "Updated Product Name", "price": 39.99}'
 ```
@@ -162,7 +163,7 @@ Replace `123` with the `product_id` and adjust the JSON data as needed.
 #### **Update a User**
 
 ```bash
-curl -X PUT http://localhost:5000/user/johndoe \
+curl -X PUT http://localhost:5000/users/johndoe \
 -H "Content-Type: application/json" \
 -d '{"email": "newjohn@example.com"}'
 ```
@@ -173,10 +174,10 @@ Replace `johndoe` with the `username` and adjust the JSON data as needed.
 
 #### **Delete a Product**
 
-<!-- curl -X DELETE http://192.168.4.40:5000/product/123 -->
+<!-- curl -X DELETE http://192.168.4.40:5000/products/123 -->
 
 ```bash
-curl -X DELETE http://localhost:5000/product/123
+curl -X DELETE http://localhost:5000/products/123
 ```
 
 Replace `123` with the `product_id`.
@@ -184,7 +185,7 @@ Replace `123` with the `product_id`.
 #### **Delete a User**
 
 ```bash
-curl -X DELETE http://localhost:5000/user/johndoe
+curl -X DELETE http://localhost:5000/users/johndoe
 ```
 
 Replace `johndoe` with the `username`.
@@ -209,8 +210,8 @@ Here's how you can test your Flask API with a web browser:
 
 For `GET` requests, testing is as simple as entering the URL into the browser's address bar. For example:
 
-- To get a product by its ID: `http://localhost:5000/product/<product_id>`
-- To get a user by username: `http://localhost:5000/user/<username>`
+- To get a product by its ID: `http://localhost:5000/products/<product_id>`
+- To get a user by username: `http://localhost:5000/users/<username>`
 
 Replace `<product_id>` and `<username>` with actual values from your database.
 
@@ -231,7 +232,7 @@ Browsers don't natively support sending `POST`, `PUT`, or `DELETE` requests dire
    </head>
    <body>
        <h2>Add Product</h2>
-       <form action="http://localhost:5000/product" method="post">
+       <form action="http://localhost:5000/products" method="post">
            <label for="product_id">Product ID:</label><br>
            <input type="text" id="product_id" name="product_id"><br>
    
@@ -251,7 +252,7 @@ Browsers don't natively support sending `POST`, `PUT`, or `DELETE` requests dire
 
    Example using `fetch` in the browser's console:
    ```javascript
-   fetch('http://localhost:5000/product', {
+   fetch('http://localhost:5000/products', {
      method: 'POST',
      headers: {
        'Content-Type': 'application/json'
@@ -265,3 +266,7 @@ Browsers don't natively support sending `POST`, `PUT`, or `DELETE` requests dire
 ### Conclusion
 
 Testing `GET` requests in a web browser is straightforward, but for other request types, consider using tools like Postman, browser extensions, or writing some quick JavaScript for a more comprehensive testing experience. These methods provide the flexibility needed for different HTTP methods and request content types.
+
+---
+
+[← Previous: Running your application with containers ](./DOCKER.md) | [Next: MongoDB Shell (mongosh) Cheat Sheet →](./MONGOSH.md)

@@ -2,25 +2,29 @@ version: '3.8'
 
 services:
   flask-app:
-    image: flask-app
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    container_name: flask-app
     ports:
       - "5000:5000"
     networks:
-      - mongo-network
+      - app-network
     environment:
-      - FLASK_APP=app.py
-      - FLASK_RUN_HOST=0.0.0.0
-      - MONGODB_HOST=mongo-server
-    depends_on:
-      - mongo-server
+      FLASK_APP: app.py
+      FLASK_RUN_HOST: 0.0.0.0
+      FLASK_ENV: development
+    working_dir: /01_CRUD
+    command: ["flask", "run"]
 
-  mongo-server:
+  mongodb-server:
     image: mongo
+    container_name: mongodb-server
     ports:
       - "27017:27017"
     networks:
-      - mongo-network
+      - app-network
 
 networks:
-  mongo-network:
+  app-network:
     driver: bridge
