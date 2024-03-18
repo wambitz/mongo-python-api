@@ -8,6 +8,11 @@ app = Flask(__name__)
 
 @app.route("/")
 def index():
+    """Root endpoint that provides MongoDB server version.
+
+    Returns:
+        str: A message indicating connection to MongoDB with its version.
+    """
     return "Welcome!"
 
 

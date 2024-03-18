@@ -17,6 +17,12 @@ def running_in_docker():
 
 @app.route("/")
 def hello_world():
+    """Root endpoint that provides MongoDB server version.
+
+    Returns:
+        str: A message indicating connection to MongoDB with its version.
+    """
+
     # This will set the mongo host as localhost by default if variable is not set
     # NOTE! localhost won't work with containers, this is setting "mongodb-server" as default,
     # otherwise this can be set by "docker run" + "-e MONGODB_HOST=<mongodb_server_name> ... etc"
@@ -30,7 +36,6 @@ def hello_world():
     client = MongoClient(f"mongodb://{mongodb_host}:27017/")
     db = client.test_db
     return "Connected to MongoDB version: " + str(db.command("serverStatus")["version"])
-    # return "Hello World"
 
 
 if __name__ == "__main__":

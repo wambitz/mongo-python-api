@@ -3,7 +3,19 @@ from docker.errors import NotFound
 
 
 def stop_and_remove_container(client, container_name):
-    """Stop and remove a Docker container by its name."""
+    """Stops and removes a specified Docker container.
+
+    This function attempts to stop and forcibly remove a Docker container by its name. It handles
+    cases where the container might not exist (either already stopped or removed) and logs appropriate
+    messages to the console.
+
+    Args:
+        client: A Docker client object created with docker.from_env() or similar.
+        container_name: The name of the Docker container to stop and remove.
+
+    Raises:
+        docker.errors.APIError: An error occurred when attempting to stop or remove the container due to issues with Docker API.
+    """
     try:
         container = client.containers.get(container_name)
         container.stop()  # Stops the container
@@ -18,7 +30,18 @@ def stop_and_remove_container(client, container_name):
 
 
 def remove_network(client, network_name):
-    """Remove a Docker network by its name."""
+    """Removes a specified Docker network.
+
+    This function tries to remove a Docker network by its name. It deals with cases where the network
+    may not be found (potentially already removed) and logs appropriate messages to the console.
+
+    Args:
+        client: A Docker client object.
+        network_name: The name of the Docker network to remove.
+
+    Raises:
+        docker.errors.APIError: An error occurred when attempting to remove the network due to issues with Docker API.
+    """
     try:
         network = client.networks.get(network_name)
         network.remove()

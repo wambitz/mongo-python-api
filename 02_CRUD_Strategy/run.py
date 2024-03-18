@@ -15,7 +15,34 @@ def run_container(
     remove=False,
     working_dir=None,
 ):
-    """Attempts to start a Docker container with the specified configuration."""
+    """
+    Starts a Docker container based on the specified parameters.
+
+    This function attempts to run a Docker container using the provided image and configuration. It
+    supports setting the container's name, ports, network, environment variables, and working directory.
+    The function handles exceptions related to image availability, container errors, and API issues, logging
+    appropriate messages. It can optionally remove the container upon exit.
+
+    Args:
+        client: A Docker client object created with docker.from_env() or similar.
+        name: A string specifying the name of the container.
+        image: A string specifying the Docker image to use for the container.
+        ports: A dictionary mapping container ports to host ports, e.g., {"container_port/tcp": host_port}.
+        command: Optional; the command to run in the container.
+        network: Optional; the network to connect the container to.
+        environment: Optional; a dictionary of environment variables to set in the container.
+        remove: Optional; a boolean indicating whether to automatically remove the container when it exits.
+        working_dir: Optional; the working directory to set for the command to run in.
+
+    Returns:
+        A Docker container object if the container starts successfully. None if an error occurs.
+
+    Raises:
+        ImageNotFound: Raised when the specified Docker image is not available.
+        ContainerError: Raised when there's an error in container execution.
+        APIError: Raised when the Docker API encounters an error.
+        Exception: Catches and logs unexpected errors during container run.
+    """
     try:
         container = client.containers.run(
             image,
