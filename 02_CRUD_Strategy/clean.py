@@ -10,7 +10,9 @@ def stop_and_remove_container(client, container_name):
         container.remove(force=True)  # Forcibly removes the container
         print(f"Container '{container_name}' stopped and forcibly removed.")
     except NotFound:
-        print(f"Container '{container_name}' not found. It might be already stopped or removed.")
+        print(
+            f"Container '{container_name}' not found. It might be already stopped or removed."
+        )
     except docker.errors.APIError as e:
         print(f"Error removing container '{container_name}': {e}")
 

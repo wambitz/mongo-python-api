@@ -20,8 +20,8 @@ def build_image(client, tag, path="."):
     try:
         _, build_log = client.images.build(path=path, tag=tag, rm=True)
         for line in build_log:
-            if 'stream' in line:
-                print(line['stream'].strip())
+            if "stream" in line:
+                print(line["stream"].strip())
         print(f"Image '{tag}' built successfully.")
     except BuildError as e:
         print(f"Error building image: {e}")
@@ -49,6 +49,10 @@ if __name__ == "__main__":
     mongo_image_name = "mongo"
 
     create_network(client, network_name)
-    check_and_pull_image(client, base_image_name)  # Optional based on your Docker Compose setup
-    check_and_pull_image(client, mongo_image_name)  # Useful if you want to ensure MongoDB image is pre-pulled
+    check_and_pull_image(
+        client, base_image_name
+    )  # Optional based on your Docker Compose setup
+    check_and_pull_image(
+        client, mongo_image_name
+    )  # Useful if you want to ensure MongoDB image is pre-pulled
     build_image(client, app_image_tag, "..")
