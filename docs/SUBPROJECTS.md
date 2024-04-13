@@ -1,3 +1,5 @@
+[← Back to Main README](../README.md)
+
 # HOWTO: Run subprojects
 
 This guide describe different ways of running the subprojects in this repository. Every project builds upon the previous one, each one adds new more complex features:
@@ -211,3 +213,5 @@ docker network rm app-network
 - **Security**: Be cautious with port exposure and security configurations, especially if you're planning for a production deployment.
 
 This approach gives you a more granular control over your containers and helps in understanding the networking and communication between different Docker containers.
+
+[← Previous: MongoDB Shell (mongosh) Cheat Sheet](./MONGOSH.md) 

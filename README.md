@@ -15,5 +15,7 @@ Follow this guide to run the hello world app in the root directory. This will gu
 4. Test `CRUD` applications in this repository with several methods, but mostly with `Postman`: [Testing Mongo CRUD API](./docs/TESTING.md) 
 
 5. For quick MongoDB commands cheat sheet: [MongoDB Shell (mongosh) Cheat Sheet](./docs/MONGOSH.md)
+
+6. Running the examples [HOWTO: Run subprojects](./docs/SUBPROJECTS.md)
  
 [Next: Setup MongoDB for development →](./docs/MONGO.md)
