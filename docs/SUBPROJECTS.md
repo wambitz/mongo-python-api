@@ -113,6 +113,7 @@ Forcefully:
 
 - Removes mongo container
 - Removes flask container
+- Removes created network
 
 ```python
 python clean.py
