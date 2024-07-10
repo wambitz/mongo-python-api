@@ -63,7 +63,7 @@ docker run --rm --name mongodb-server -d -p 27017:27017 mongo
 # docker run --rm --name mongodb-server --network app-network -d -p 27017:27017 mongo
 ```
 
-This command runs MongoDB in a container named `mongo`, exposes port 27017 (the default MongoDB port), and runs it in detached mode.
+This command runs MongoDB in a container named `mongo`, exposes port `27017` (the default MongoDB port), and runs it in detached mode.
 
 ### 3. **Network Configuration**
 
@@ -105,7 +105,7 @@ Verify the container is the same network
 docker network inspect app-network
 ```
 
-This command runs your Flask app in a container named `flask-app`, exposes port 5000, and connects it to the `app-network`.
+This command runs your Flask app in a container named `flask-app`, exposes port `5000`, and connects it to the `app-network`.
 
 ### 5. **Verify the Setup**
 

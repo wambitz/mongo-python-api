@@ -166,23 +166,13 @@ python app.py
 
 ### Step 5: Test the application
 
-There are several ways of testing this, the most recommended one would be using a service like `Postman`
+There are several ways of testing this, the most recommended one would be using `Postman` and the `JSON` file under `tests` directory.
 
 - **Postman**
 - **Curl**
 - **Web Browser**
 
 > For more details on how to test, have a look into [TESTING.md](./TESTING.md)
-
-
-### Additional Considerations
-
-- **Error Handling**: Add proper error handling to make your API robust.
-- **Authentication**: Implement authentication (like JWT) for secure access.
-- **Data Validation**: Validate incoming data for consistency and security.
-- **Unit Testing**: Write tests to ensure your API works as expected.
-
-This guide should get you started. As you progress, you might want to refine the structure, add more features, or even containerize the app using Docker for easier deployment. Since you have experience in Docker, it can be a great addition to this project. Happy coding!
 
 ---
 

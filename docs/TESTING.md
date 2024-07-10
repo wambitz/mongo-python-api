@@ -8,7 +8,7 @@ To test your Flask app with Postman, follow these steps for each CRUD operation.
 
 You can find and import this configuration in [MongoDB_Python_API.json](../tests/MongoDB_Python_API.postman_collection.json).
 
-Here is an image how the project should look like at the end:
+Here is an image how the project should look like after loading:
 
 ![Alt text](./images/image.png)
 
