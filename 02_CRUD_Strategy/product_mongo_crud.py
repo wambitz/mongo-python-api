@@ -75,7 +75,7 @@ if __name__ == "__main__":
     # Creating a product
     product_id = product_crud.create(
         {"product_id": "123", "name": "Example Product", "price": 29.99}
-    )
+    ).inserted_id
 
     # Reading the newly created product
     product = product_crud.read({"_id": product_id})

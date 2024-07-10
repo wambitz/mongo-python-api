@@ -76,7 +76,7 @@ if __name__ == "__main__":
     # Creating a user
     user_id = user_crud.create(
         {"username": "jonhdoe", "name": "John Doe", "email": "john@example.com"}
-    )
+    ).inserted_id
 
     # Reading the newly created user
     user = user_crud.read({"_id": user_id})
