@@ -156,7 +156,7 @@ docker network connect app-network mongodb-server
 Next, run the MongoDB container. You can pull the official MongoDB image and run it:
 
 ```bash
-docker run --name mongodb-server --network app-network -d -p 27017:27017 mongo
+docker run --rm --name mongodb-server --network app-network -d -p 27017:27017 mongo
 ```
 
 This command runs MongoDB in a container named `mongo`, exposes port 27017 (the default MongoDB port), and runs it in detached mode.
